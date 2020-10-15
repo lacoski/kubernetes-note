@@ -10,24 +10,29 @@
 
 ## Phần 2. Chuẩn bị môi trường
 
-Thực hiện trên tất cả các node
-
-Đặt hostname cho từng node:
+### Bước 1: Đặt hostname cho từng node
 
 > Thực hiện trên node Master 1181
+
 ```
 hostnamectl set-hostname master1181
 ```
 
 > Thực hiện trên node Worker 1182
+
 ```
 hostnamectl set-hostname worker1182
 ```
 
 > Thực hiện trên node Worker 1183
+
 ```
 hostnamectl set-hostname worker1183
 ```
+
+### Bước 2: Chuẩn bị môi trường triển khai
+
+> Thực hiện trên tất cả các node
 
 Tắt SELinux, Firewall
 ```
