@@ -536,6 +536,6 @@ Kết quả
 
 ## Tài liệu tham khảo
 
-https://kipalog.com/posts/Zero-downtime-voi-Kubernetes-P1--Truly-stateless-application
+https://github.com/hocchudong/ghichep-kubernetes/blob/master/docs/kubernetes-5min/02.Caidat-Kubernetes.md
 
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
