@@ -531,7 +531,7 @@ Truy cập web với đường dẫn http://10.10.11.81:30001/, http://10.10.11.
 
 Kết quả
 
-pic3
+![](/images/install-k8s-centos7-kubeadm/pic3.png)
 
 
 ## Tài liệu tham khảo
