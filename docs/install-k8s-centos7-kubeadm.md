@@ -302,14 +302,69 @@ worker1183   Ready    <none>   73s   v1.19.3
 
 ```
 
-## Phần 4. Join node vào cluster
+## Phần 4. Join worker vào cluster
+
+### Bước 1: Sinh câu lệnh join woker
+
+> Thực hiện trên node master1181
+
+Thực hiện
+```
+sudo kubeadm token create --print-join-command
+```
+
+Kết quả
+```
+[root@master1181 ~]# sudo kubeadm token create --print-join-command
+W1015 20:24:23.607760   27097 configset.go:348] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
+kubeadm join 10.10.11.81:6443 --token yfn8mf.5yckeekleb0yp8m2     --discovery-token-ca-cert-hash sha256:935f610b57d3c170c9849402bef83226258610535b96823e421c20bdc2f83ce2 
+```
+
+### Bước 2: Thực hiện câu lệnh trên từng node worker 
 
 ```
 kubeadm join 10.10.11.81:6443 --token yfn8mf.5yckeekleb0yp8m2 \
     --discovery-token-ca-cert-hash sha256:935f610b57d3c170c9849402bef83226258610535b96823e421c20bdc2f83ce2 
 ```
 
-Kiểm tra
+Kết quả
+```
+[root@worker1182 ~]# kubeadm join 10.10.11.81:6443 --token yfn8mf.5yckeekleb0yp8m2 \
+>     --discovery-token-ca-cert-hash sha256:935f610b57d3c170c9849402bef83226258610535b96823e421c20bdc2f83ce2 
+[preflight] Running pre-flight checks
+	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+
+[root@worker1183 ~]# kubeadm join 10.10.11.81:6443 --token yfn8mf.5yckeekleb0yp8m2 \
+>     --discovery-token-ca-cert-hash sha256:935f610b57d3c170c9849402bef83226258610535b96823e421c20bdc2f83ce2 
+[preflight] Running pre-flight checks
+	[WARNING IsDockerSystemdCheck]: detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd". Please follow the guide at https://kubernetes.io/docs/setup/cri/
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap...
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+```
+
+### Bước 3: Kiểm tra tại node master1181
 
 ```
 [root@master1181 ~]# kubectl get nodes
