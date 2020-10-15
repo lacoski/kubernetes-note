@@ -2,7 +2,7 @@
 
 ## Lý thuyết
 
-### [1. Tổng quân về Kubernetes]()
+### [1. Tổng quan về Kubernetes]()
 
 ## Thực hành
 
