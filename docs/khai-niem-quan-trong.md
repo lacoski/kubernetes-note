@@ -1,0 +1,14 @@
+Có các khái niệm chính như sau trong K8S:
+- Pods
+- Labels
+- Replica Controllers
+- Replica Sets
+- Deployments
+- Services
+- Volumes
+- Config Maps
+- Daemons
+- Jobs
+- Cron Jobs
+- Namespaces
+- Quotas and Limits
