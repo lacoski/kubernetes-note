@@ -984,31 +984,13 @@ spec:
     storage: 1Gi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: nfs
   nfs:
     path: /var/nfsshare/mypv
     server: 10.10.11.99
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mypv1
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Recycle
-  storageClassName: nfs
-  nfs:
-    path: /var/nfsshare/mypv
-    server: 10.10.11.99
-
-[root@master1181 ~]# kubectl apply -f nfs-pv1.yml 
-
+    readOnly: false
 
 [root@master1181 ~]# cat nfs-pvc1.yml
 apiVersion: v1
@@ -1017,12 +999,229 @@ metadata:
   name: mypvc1
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
+  storageClassName: "nfs"
   resources:
     requests:
       storage: 1Gi
-    storageClassName: nfs
 
 [root@master1181 ~]# kubectl apply -f nfs-pvc1.yml 
+persistentvolumeclaim/nfs created
+
+[root@master1181 ~]# kubectl get pvc
+NAME     STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mypvc1   Bound    mypv1    1Gi        RWX            nfs            5s
+
+[root@master1181 ~]# kubectl get pvc
+NAME     STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mypvc1   Bound    mypv1    1Gi        RWX            nfs            6s
+
+https://www.linuxtechi.com/configure-nfs-persistent-volume-kubernetes/
+
+# Lưu ý:
+# - Địa chỉ /var/nfsshare/mypv phải tồn tại đễ dữ liệu pod mapping
+# - Node NFS phải allow tất cả worker (bản thân mount vào worker = mapping vào thư mục container)
+
+[root@master1181 ~]# cat pod1.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+spec:
+  volumes:
+    - name: pod1vl
+      persistentVolumeClaim:
+        claimName: mypvc1
+  containers:
+    - name: hello
+      image: busybox
+      args:
+        - /bin/sh
+        - -c
+        - sleep 30000
+      volumeMounts:
+        - mountPath: "/mydate"
+          name: pod1vl
+
+[root@master1181 ~]# kubectl apply -f pod1.yml 
+pod/pod1 created
+
+[root@master1181 ~]# kubectl describe pod pod1
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  31s   default-scheduler  Successfully assigned default/pod1 to worker1182
+  Normal  Pulling    30s   kubelet            Pulling image "busybox"
+  Normal  Pulled     24s   kubelet            Successfully pulled image "busybox" in 6.146294542s
+  Normal  Created    24s   kubelet            Created container hello
+  Normal  Started    23s   kubelet            Started container hello
+
+[root@master1181 ~]# kubectl exec pod1 -- touch /mydata/hello
+
+[root@master1181 ~]# ls /nfsdemo/mypv/hello 
+/nfsdemo/mypv/hello
 
 ```
+
+https://www.cnblogs.com/CloudMan6/p/8721078.html
+
+## Khi xoá pod dư ra volume
+
+
+https://www.cnblogs.com/CloudMan6/p/8742573.html
+
+Cần đọc thêm về status volume (Policy mount)
+
+```
+[root@master1181 ~]# kubectl get pv
+NAME    CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM            STORAGECLASS   REASON   AGE
+mypv1   1Gi        RWX            Recycle          Bound    default/mypvc1   nfs                     5h36m
+
+[root@master1181 ~]# kubectl get pvc
+NAME     STATUS   VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mypvc1   Bound    mypv1    1Gi        RWX            nfs            84m
+
+[root@master1181 ~]# kubectl delete -f pod1.yml 
+pod "pod1" deleted
+```
+
+## Triển khai mysql với persitent volume (NFS)
+
+Tạo mới địa chỉ sau trên nfs
+- 10.10.11.99:/var/nfsshare/mysqlpv
+
+```
+[root@master1181 ~]# cat mysqlpv.yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysqlpv
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  nfs:
+    path: /var/nfsshare/mysqlpv
+    server: 10.10.11.99
+    readOnly: false
+
+[root@master1181 ~]# cat mysqlpvc.yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysqlpvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "nfs"
+  resources:
+    requests:
+      storage: 1Gi
+
+[root@master1181 ~]# kubectl apply -f mysqlpv.yml
+persistentvolume/mysqlpv created
+[root@master1181 ~]# kubectl apply -f mysqlpvc.yml
+persistentvolumeclaim/mysqlpvc created
+
+[root@master1181 ~]# kubectl get pv
+NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM              STORAGECLASS   REASON   AGE
+mypv1     1Gi        RWX            Recycle          Bound    default/mypvc1     nfs                     5h47m
+mysqlpv   1Gi        RWX            Recycle          Bound    default/mysqlpvc   nfs                     15s
+
+[root@master1181 ~]# kubectl get pv
+NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM              STORAGECLASS   REASON   AGE
+mypv1     1Gi        RWX            Recycle          Bound    default/mypvc1     nfs                     5h47m
+mysqlpv   1Gi        RWX            Recycle          Bound    default/mysqlpvc   nfs                     15s
+
+
+[root@master1181 ~]# cat mysql-pod.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: password
+        ports:
+          - containerPort: 3306
+            name: mysql
+        volumeMounts:
+          - name: mysql-persistent-storage
+            mountPath: "/var/lib/mysql"
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: mysqlpvc
+
+[root@master1181 ~]# kubectl apply -f mysql-pod.yml
+service/mysql unchanged
+deployment.apps/mysql created
+
+[root@master1181 ~]# kubectl get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+mysql   1/1     1            1           3m30s
+
+[root@master1181 ~]# kubectl describe deployment mysql
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  11m   deployment-controller  Scaled up replica set mysql-8759c6bfc to 1
+
+[root@master1181 ~]# kubectl get pods -o wide
+NAME                    READY   STATUS    RESTARTS   AGE    IP            NODE         NOMINATED NODE   READINESS GATES
+mysql-8759c6bfc-trwlt   1/1     Running   0          12m    10.244.2.46   worker1183   <none>           <none>
+
+
+[root@master1181 ~]# kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword
+If you don't see a command prompt, try pressing enter.
+
+mysql> use mysql
+Database changed
+mysql> create table my_id ( id int(4) );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert my_id values( 111 );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from my_id;
++------+
+| id   |
++------+
+|  111 |
++------+
+1 row in set (0.00 sec)
+
+# Down node woker 1183 (đợi 5 - 10 phút) pods chuyển trạng thái UNKNOWN
+```
+
+https://www.cnblogs.com/CloudMan6/p/8806237.html
+
+https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/
