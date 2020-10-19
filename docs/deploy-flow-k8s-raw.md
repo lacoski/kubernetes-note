@@ -882,3 +882,147 @@ Events:
 
 
 https://www.cnblogs.com/CloudMan6/p/8543006.html
+
+
+## Volume
+
+Essentially, Kubernetes Volume is a directory, which is similar to Docker Volume. When the Volume is mounted to the Pod, all containers in the Pod can access the Volume. Kubernetes Volume also supports a variety of backend types, including emptyDir, hostPath, GCE Persistent Disk, AWS Elastic Block Store, NFS, Ceph, etc. For the complete list, please refer to  https://kubernetes.io/docs/concepts/storage/volumes/#types -of-volumes
+
+
+```
+[root@master1181 ~]# cat pod-empty-dir.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: k8s.gcr.io/test-webserver
+    name: test-container
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}
+
+[root@master1181 ~]# kubectl apply -f pod-empty-dir.yml 
+pod/test-pd created
+
+[root@master1181 ~]# kubectl get pods -o wide
+NAME                     READY   STATUS      RESTARTS   AGE   IP            NODE         NOMINATED NODE   READINESS GATES
+test-pd                  1/1     Running     0          65s   10.244.2.44   worker1183   <none>           <none>
+
+[root@worker1183 ~]# docker ps -a
+CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS                    PORTS               NAMES
+8c224f9ea13e        k8s.gcr.io/test-webserver      "/test-webserver"        2 minutes ago       Up 2 minutes                                  k8s_test-container_test-pd_default_5b5d51e0-16fe-41f0-a75a-36ace57e0965_0
+
+[root@worker1183 ~]# docker inspect 8c224f9ea13e
+        "HostConfig": {
+            "Binds": [
+                "/var/lib/kubelet/pods/5b5d51e0-16fe-41f0-a75a-36ace57e0965/volumes/kubernetes.io~empty-dir/cache-volume:/cache",
+                "/var/lib/kubelet/pods/5b5d51e0-16fe-41f0-a75a-36ace57e0965/volumes/kubernetes.io~secret/default-token-4cpsj:/var/run/secrets/kubernetes.io/serviceaccount:ro",
+                "/var/lib/kubelet/pods/5b5d51e0-16fe-41f0-a75a-36ace57e0965/etc-hosts:/etc/hosts",
+                "/var/lib/kubelet/pods/5b5d51e0-16fe-41f0-a75a-36ace57e0965/containers/test-container/9b1b055b:/dev/termination-log"
+            ],
+
+```
+
+
+
+
+```
+[root@master1181 ~]# kubectl get --namespace=kube-system pods
+NAME                                 READY   STATUS    RESTARTS   AGE
+coredns-f9fd979d6-4bbh9              1/1     Running   0          3d15h
+coredns-f9fd979d6-tzg46              1/1     Running   0          3d15h
+etcd-master1181                      1/1     Running   0          3d15h
+kube-apiserver-master1181            1/1     Running   0          3d15h
+kube-controller-manager-master1181   1/1     Running   0          3d15h
+kube-flannel-ds-4x45h                1/1     Running   0          3d15h
+kube-flannel-ds-fljt4                1/1     Running   0          3d15h
+kube-flannel-ds-fvlxv                1/1     Running   2          3d15h
+kube-proxy-lc54k                     1/1     Running   0          3d15h
+kube-proxy-vmdx4                     1/1     Running   2          3d15h
+kube-proxy-wbm7j                     1/1     Running   0          3d15h
+kube-scheduler-master1181            1/1     Running   0          3d15h
+
+kubectl edit --namespace=kube-system pod kube-apiserver-master1181
+```
+
+Hỗ trợ Ceph, GlusterFS
+
+Pod is usually maintained by the application developer, while Volume is usually maintained by the storage system administrator. Developers need to obtain the above information:
+- Or ask the administrator.
+- Either you are the administrator.
+
+
+
+PersistentVolume (PV) is a piece of storage space in an external storage system, created and maintained by an administrator. Like Volume, PV is persistent and its life cycle is independent of Pod.
+
+PersistentVolumeClaim (PVC) is an application (Claim) for PV. PVCs are usually created and maintained by ordinary users. When you need to allocate storage resources for a Pod, users can create a PVC to indicate the capacity and access mode (such as read-only) of the storage resources, and Kubernetes will find and provide PVs that meet the conditions.
+
+## Volume NFS
+
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+https://www.cnblogs.com/CloudMan6/p/8721078.html
+
+Mount NFS vào server
+
+sudo mount -o v3 10.10.10.99:/var/nfsshare /nfsdemo
+
+Tạo PV:
+
+```
+[root@master1181 ~]# cat nfs-pv1.yml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mypv1
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  nfs:
+    path: /var/nfsshare/mypv
+    server: 10.10.11.99
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mypv1
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: nfs
+  nfs:
+    path: /var/nfsshare/mypv
+    server: 10.10.11.99
+
+[root@master1181 ~]# kubectl apply -f nfs-pv1.yml 
+
+
+[root@master1181 ~]# cat nfs-pvc1.yml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+    storageClassName: nfs
+
+[root@master1181 ~]# kubectl apply -f nfs-pvc1.yml 
+
+```
