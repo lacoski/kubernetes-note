@@ -56,3 +56,52 @@ kube-system - The system resources created by Kubernetes itself will be placed i
 
 Familiar with these important concepts of k8s, starting from the next section, we will build our own Kubernetes cluster.
 
+
+
+
+Readiness Checks
+
+
+Deployment Strategies
+- Recreate Strategy
+- RollingUpdate Strategy
+
+rollouts
+
+DaemonSets
+DaemonSets are used to deploy system daemons such as log collectors
+and monitoring agents, which typically must run on every node. DaemonSets share
+similar functionality with ReplicaSets; both create Pods that are expected to be longrunning services and ensure that the desired state and the observed state of the clus‐
+ter match.
+
+RollingUpdate
+
+Jobs
+
+ConfigMaps and Secrets
+
+Role-Based Access Control
+
+Integrating Storage Solutions and Kubernetes
+
+StatefulSets
+
+• A persistent volume to manage the lifespan of the on-disk storage independently
+from the lifespan of the running MySQL application
+• A MySQL Pod that will run the MySQL application
+• A service that will expose this Pod to other containers in the cluster
+
+singleton Pod
+
+https://kubernetes.io/docs/concepts/services-networking/service/
+
+Service resources
+In Kubernetes, a Service is an abstraction which defines a logical set of Pods and a policy by which to access them (sometimes this pattern is called a micro-service). The set of Pods targeted by a Service is usually determined by a selector. To learn about other ways to define Service endpoints, see Services without selectors.
+
+Lastly, the user-space proxy installs iptables rules which capture traffic to the Service's clusterIP (which is virtual) and port. The rules redirect that traffic to the proxy port which proxies the backend Pod.
+
+By default, kube-proxy in userspace mode chooses a backend via a round-robin algorithm.
+
+https://kubernetes.io/docs/concepts/services-networking/service/#proxy-mode-ipvs
+
+https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
