@@ -17,7 +17,7 @@ Lưu ý:
 
 ## Worker Node
 
-- Đước quản lý bởi Master Node
+- Được quản lý bởi Master Node
 - Tiếp nhận các yêu cầu từ Master Node
 - Chạy các Pods (Các container chạy trong Pods)
 - Nơi chạy môi trường Container (như Docker Engine), thực hiện các thao tác downloading images, chạy các containers
@@ -72,3 +72,8 @@ Lưu ý:
     - Gắn cho Deployment 1 IP Public
     - Có thể truy cập dịch vụ thông qua IP Public
     - Traffic được cân bằng tải tới tập các Pod bên trong Cluster
+
+## Nguồn
+
+https://collabnix.github.io/kubelabs/Kubernetes_Architecture.html
+

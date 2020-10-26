@@ -6,27 +6,27 @@
 
 ### [2. Các khái niệm quan trọng](/docs/2-term-k8s.md)
 
-#### 3.1 Khái niệm Pod
+#### [2.1 Khái niệm Pod](/docs/2.1-pod-k8s.md)
 
-#### 3.2 Khái niệm ReplicaSet
+#### 2.2 Khái niệm ReplicaSet
 
-#### 3.3 Khái niệm Deployment
+#### 2.3 Khái niệm Deployment
 
-#### 3.4 Khái niệm Scheduler
+#### 2.4 Khái niệm Scheduler
 
-#### 3.5 Khái niệm về Services
+#### 2.5 Khái niệm về Services
 
-#### 3.6 Khái niệm về StatefulSets
+#### 2.6 Khái niệm về StatefulSets
 
-#### 3.7 Khái niệm về DaemonSet
+#### 2.7 Khái niệm về DaemonSet
 
-#### 3.8 Khái niệm về Ingress
+#### 2.8 Khái niệm về Ingress
 
-#### 3.9 Khái niệm về RBAC
+#### 2.9 Khái niệm về RBAC
 
-### 4. Tổng quan về Helm
+### 3. Tổng quan về Helm
 
-### 5. Kiến trúc Helm
+### 4. Kiến trúc Helm
 
 ## Thực hành
 
