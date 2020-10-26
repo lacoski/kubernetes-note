@@ -14,17 +14,19 @@
 
 #### [2.4 Khái niệm Scheduler](/docs/2.4-scheduler-k8s.md)
 
-#### [2.5 Khái niệm về Services](/docs/2.5-services-k8s.md)
+#### [2.5 Khái niệm Services](/docs/2.5-services-k8s.md)
 
-#### [2.6 Khái niệm về StatefulSets](/docs/2.6-sfs-k8s.md)
+#### [2.6 Khái niệm StatefulSets](/docs/2.6-sfs-k8s.md)
 
-#### 2.7 Khái niệm về DaemonSet
+#### [2.7 Khái niệm DaemonSet](/docs/2.7-ds-k8s.md)
 
-#### 2.8 Khái niệm về Ingress
+#### [2.8 Khái niệm Job](/docs/2.8-job-k8s.md)
 
-#### 2.9 Khái niệm về RBAC
+#### [2.9 Khái niệm Ingress]()
 
-### 3. Tổng quan về Helm
+#### [2.10 Khái niệm RBAC]()
+
+### 3. Tổng quan Helm
 
 ### 4. Kiến trúc Helm
 
