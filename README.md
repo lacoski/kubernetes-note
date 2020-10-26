@@ -16,7 +16,7 @@
 
 #### [2.5 Khái niệm về Services](/docs/2.5-services-k8s.md)
 
-#### 2.6 Khái niệm về StatefulSets
+#### [2.6 Khái niệm về StatefulSets](/docs/2.6-sfs-k8s.md)
 
 #### 2.7 Khái niệm về DaemonSet
 
