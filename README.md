@@ -12,9 +12,9 @@
 
 #### [2.3 Khái niệm Deployment](/docs/2.3-deployment-k8s.md)
 
-#### [2.4 Khái niệm Scheduler](/docs/2.2-scheduler-k8s.md)
+#### [2.4 Khái niệm Scheduler](/docs/2.4-scheduler-k8s.md)
 
-#### 2.5 Khái niệm về Services
+#### [2.5 Khái niệm về Services](/docs/2.5-services-k8s.md)
 
 #### 2.6 Khái niệm về StatefulSets
 
