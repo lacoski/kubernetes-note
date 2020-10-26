@@ -2,7 +2,7 @@
 
 ## Lý thuyết
 
-### [1. Tổng quan về Kubernetes]()
+### [1. Tổng quan về Kubernetes](/docs/1-introduction-k8s.md)
 
 ### [2. Kiển trúc về Kubernetes]()
 
@@ -41,3 +41,12 @@
 #### 3.1 Thao tác với Pod
 
 #### 3.1 Thao tác với Deployments
+
+### 3. Hướng dẫn cài đặt Wordpress
+
+### 4. Hướng dẫn cài đặt Helm
+
+### 5. Hướng dẫn cài đặt Wordpress bằng Helm
+
+### 6. Hướng dẫn cài đặt Weave Scope
+
