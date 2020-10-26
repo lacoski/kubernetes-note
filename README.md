@@ -2,11 +2,9 @@
 
 ## Lý thuyết
 
-### [1. Tổng quan về Kubernetes](/docs/1-introduction-k8s.md)
+### [1. Tổng quan và kiến trúc Kubernetes](/docs/1-introduction-k8s.md)
 
-### [2. Kiển trúc về Kubernetes]()
-
-### [3. Các khái niệm quan trọng]()
+### [2. Các khái niệm quan trọng](/docs/2-term-k8s.md)
 
 #### 3.1 Khái niệm Pod
 
