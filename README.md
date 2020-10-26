@@ -22,9 +22,9 @@
 
 #### [2.8 Khái niệm Job](/docs/2.8-job-k8s.md)
 
-#### [2.9 Khái niệm Ingress]()
+#### 2.9 Khái niệm Ingress
 
-#### [2.10 Khái niệm RBAC]()
+#### 2.10 Khái niệm RBAC
 
 ### 3. Tổng quan Helm
 
