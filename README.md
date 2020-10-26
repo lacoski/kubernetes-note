@@ -8,9 +8,9 @@
 
 #### [2.1 Khái niệm Pod](/docs/2.1-pod-k8s.md)
 
-#### 2.2 Khái niệm ReplicaSet
+#### [2.2 Khái niệm ReplicaSet](/docs/2.2-rs-k8s.md)
 
-#### 2.3 Khái niệm Deployment
+#### [2.3 Khái niệm Deployment](/docs/2.3-deployment-k8s.md)
 
 #### 2.4 Khái niệm Scheduler
 
