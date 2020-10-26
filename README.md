@@ -48,3 +48,4 @@
 
 ### 6. Hướng dẫn cài đặt Weave Scope
 
+### 7. Hướng dẫn cài đặt Kubernetes Dashboard
