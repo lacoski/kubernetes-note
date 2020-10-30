@@ -34,11 +34,11 @@
 
 ### [2. Hướng dẫn cài đặt Kubernetes (sử dụng Kubeadmin) trên CentOS 7](/docs/install-k8s-centos7-kubeadm.md)
 
-### [3. Sử dụng Kubernetes 101]
+### [3. Sử dụng Kubernetes 101]()
 
-#### 3.1 Thao tác với Pod
+#### [3.1. Thao tác với Pod](/docs/practise/pod-101.md)
 
-#### 3.1 Thao tác với Deployments
+#### [3.2. Thao tác với Deployment](/docs/practise/deployment-101.md)
 
 ### 3. Hướng dẫn cài đặt Wordpress
 
