@@ -26,9 +26,7 @@
 
 #### 2.10 Khái niệm RBAC
 
-### 3. Tổng quan Helm
-
-### 4. Kiến trúc Helm
+### 3. [Tổng quan và kiến trúc Helm](/docs/3-helm-k8s.md)
 
 ## Thực hành
 
