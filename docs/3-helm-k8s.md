@@ -4,7 +4,7 @@
 
 Helm là trình quản lý gói dành riêng cho Kubernetes. Giống các hệ điều hành CentOS dùng Yum hoặc Ubuntu dùng APT, K8s cũng cần công cụ quản lý dịch vụ chạy trên Cluster K8s. Với Helm, thao tác quản lý các service sẽ đơn giản hơn khi sử dụng kubectl định nghĩa hoặc khai báo các service. Ngoài ra Helm cũng cho phép chia sẻ resource Helm, tức sẽ có các tổ chức cung cấp các Helm Chart (Helm Hub) có sẵn để chúng ta triển khai các dịch vụ nhanh hơn (wordpress, SELK, ...)
 
-Sử dụng Helm trong 1 số trường hợp sau:
+Sử dụng Helm trong các trường hợp sau:
 - Cài đặt Apache, Nginx
 - Cài đặt MariaDB, MySQL
 - Cài đặt Wordpress
