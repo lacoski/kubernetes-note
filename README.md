@@ -40,6 +40,8 @@
 
 #### [3.2. Thao tác với Deployment](/docs/practise/deployment-101.md)
 
+### Triển khai NFS làm Storage cho K8s
+
 ### 3. Hướng dẫn cài đặt Wordpress
 
 ### 4. Hướng dẫn cài đặt Helm
