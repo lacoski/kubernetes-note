@@ -30,6 +30,8 @@
 
 ## Thực hành cơ bản
 
+### Sử dụng Kubernetes 101
+
 ### [1. Hướng dẫn Cài đặt Kubernetes (sử dụng Minikube)]()
 
 ### [2. Hướng dẫn cài đặt Kubernetes (sử dụng Kubeadmin) trên CentOS 7](/docs/setup/install-k8s-centos7-kubeadm.md)
@@ -40,10 +42,9 @@
 
 ### [5. Hướng dẫn cài đặt và sử dụng Helm](/docs/setup/install-helm-k8s.md)
 
-### 6. Hướng dẫn cài đặt Wordpress bằng Helm
+### [6. Hướng dẫn cài đặt Wordpress bằng Helm]()
 
 ### 7. Hướng dẫn cài đặt Weave Scope
 
 ### 8. Hướng dẫn cài đặt Kubernetes Dashboard
 
-## Sử dụng Kubernetes 101

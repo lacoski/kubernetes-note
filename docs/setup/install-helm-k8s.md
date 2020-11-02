@@ -588,6 +588,17 @@ Truy cập đường dẫn http://10.10.11.81:31559/
 
 Tới đây kết thúc tài liệu hướng dẫn sử dụng helm chart cơ bản.
 
+Dọn dẹp
+```
+[root@master1181 helm]# helm ls
+NAME           	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION
+democustomchart	default  	1       	2020-11-02 11:40:55.864678081 +0700 +07	deployed	mychart-0.1.0	1.16.0     
+[root@master1181 helm]# helm uninstall democustomchart
+release "democustomchart" uninstalled
+[root@master1181 helm]# helm ls
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+```
+
 ## Nguồn
 
 https://helm.sh/docs/intro/using_helm/
