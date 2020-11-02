@@ -36,14 +36,14 @@
 
 ### [3. Triển khai NFS làm Storage cho K8s](/docs/setup/install-nfs-storage-k8s.md)
 
-### 3. Hướng dẫn cài đặt Wordpress
+### [4. Hướng dẫn cài đặt Wordpress trên K8s](/docs/setup/setup-wordpress-basic.md)
 
-### 4. Hướng dẫn cài đặt Helm
+### 5. Hướng dẫn cài đặt Helm
 
-### 5. Hướng dẫn cài đặt Wordpress bằng Helm
+### 6. Hướng dẫn cài đặt Wordpress bằng Helm
 
-### 6. Hướng dẫn cài đặt Weave Scope
+### 7. Hướng dẫn cài đặt Weave Scope
 
-### 7. Hướng dẫn cài đặt Kubernetes Dashboard
+### 8. Hướng dẫn cài đặt Kubernetes Dashboard
 
 ## Sử dụng Kubernetes 101
