@@ -30,9 +30,15 @@
 
 ## Thực hành cơ bản
 
-### Sử dụng Kubernetes 101
+### [Sử dụng Kubernetes 101](/docs/practise/kubernetes-101.md)
 
-### [1. Hướng dẫn Cài đặt Kubernetes (sử dụng Minikube)]()
+### [1. Thao tác với Pods](/docs/practise/pod-101.md)
+
+### [2. Thao tác với Deployments](/docs/practise/deployment-101.md)
+
+## Thực hành
+
+### 1. Hướng dẫn cài đặt Kubernetes (sử dụng Minikube)
 
 ### [2. Hướng dẫn cài đặt Kubernetes (sử dụng Kubeadmin) trên CentOS 7](/docs/setup/install-k8s-centos7-kubeadm.md)
 
@@ -46,4 +52,4 @@
 
 ### [7. Hướng dẫn cài đặt Kubernetes Dashboard](/docs/setup/setup-kubernetes-dashboard.md)
 
-### 8. Hướng dẫn cài đặt Weave Scope
+### [8. Hướng dẫn cài đặt Weave Scope](/docs/setup/setup-weave-scope.md)
