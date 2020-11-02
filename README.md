@@ -26,7 +26,9 @@
 
 #### 2.10 Khái niệm RBAC
 
-### 3. [Tổng quan và kiến trúc Helm](/docs/3-helm-k8s.md)
+### [3. Tổng quan và kiến trúc Helm](/docs/3-helm-k8s.md)
+
+### [4. Các CMD thường sử dụng với Kubectl](/docs/kubectl-cmd.md)
 
 ## Thực hành cơ bản
 
