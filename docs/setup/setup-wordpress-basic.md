@@ -32,20 +32,20 @@ mkdir wpdata2
 ```
 chown -R nfsnobody:nfsnobody /storagek8s/wpdata1
 chown -R nfsnobody:nfsnobody /storagek8s/wpdata2
-chown -R 777 /storagek8s/wpdata1
-chown -R 777 /storagek8s/wpdata2
+chmod -R 777 /storagek8s/wpdata1
+chmod -R 777 /storagek8s/wpdata2
 ```
 
 Kết quả
 ```
 [root@nfs1199 storagek8s]# chown -R nfsnobody:nfsnobody /storagek8s/wpdata1
 [root@nfs1199 storagek8s]# chown -R nfsnobody:nfsnobody /storagek8s/wpdata2
-[root@nfs1199 storagek8s]# chown -R 777 /storagek8s/wpdata1
-[root@nfs1199 storagek8s]# chown -R 777 /storagek8s/wpdata2
+[root@nfs1199 storagek8s]# chmod -R 777 /storagek8s/wpdata1
+[root@nfs1199 storagek8s]# chmod -R 777 /storagek8s/wpdata2
 [root@nfs1199 storagek8s]# ll
 total 0
-drwxr-xr-x 2 777 nfsnobody 6 09:08  2 Th11 wpdata1
-drwxr-xr-x 2 777 nfsnobody 6 09:09  2 Th11 wpdata2
+drwxrwxrwx 2 nfsnobody nfsnobody 6 13:59  2 Th11 wpdata1
+drwxrwxrwx 2 nfsnobody nfsnobody 6 13:40  2 Th11 wpdata2
 ```
 
 ## Phần 2: Triển khai Wordpress

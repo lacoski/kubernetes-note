@@ -42,7 +42,7 @@
 
 ### [5. Hướng dẫn cài đặt và sử dụng Helm](/docs/setup/install-helm-k8s.md)
 
-### [6. Hướng dẫn cài đặt Wordpress bằng Helm]()
+### [6. Hướng dẫn cài đặt Wordpress bằng Helm](/docs/setup/install-wp-helm.md)
 
 ### 7. Hướng dẫn cài đặt Weave Scope
 
