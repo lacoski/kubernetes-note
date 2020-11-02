@@ -228,7 +228,7 @@ Truy cập đường dẫn http://10.10.11.81:32233/
 
 Kết quả
 
-![](/setup/install-helm-k8s/pic1.png)
+![](/images/setup/install-helm-k8s/pic1.png)
 
 Xóa gói
 ```
@@ -584,7 +584,7 @@ kubernetes                ClusterIP   10.96.0.1       <none>        443/TCP     
 
 Truy cập đường dẫn http://10.10.11.81:31559/
 
-![](/setup/install-helm-k8s/pic1.png)
+![](/images/setup/install-helm-k8s/pic2.png)
 
 Tới đây kết thúc tài liệu hướng dẫn sử dụng helm chart cơ bản.
 
