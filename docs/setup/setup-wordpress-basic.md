@@ -8,6 +8,9 @@ Triển khai cụm Cluster 3 Node theo tài liệu:
 Triển khai NFS làm storage cho Cluster 8s theo tài liệu:
 - [Hướng dẫn cài đặt NFS làm storage cho K8s](/docs/setup/install-nfs-storage-k8s.md)
 
+Lưu ý:
+- Toàn bộ source manifest nằm tại thư mục `/src/wp`
+
 ## Phần 1: Tạo phân vùng lưu trữ data Wordpress
 
 > Thực hiện tại NFS server
@@ -364,6 +367,37 @@ Truy cập thông qua Brower: http://10.10.11.81:32457
 ![](/images/setup/setup-wordpress-basic/pic6.png)
 
 Tới đây đã hoàn thành hướng dẫn triển khai WP lên K8s cơ bản
+
+## Phần 3: Dọn dẹp
+
+Đây là bước clear toàn bộ các resource đã tạo trên k8s Cluster
+
+```
+kubectl delete -f wordpress-deployment.yaml
+kubectl delete -f mysql-deployment.yaml
+kubectl delete -f wordpress-pv.yml
+kubectl delete -f wordpress-secret.yml
+```
+
+Kết quả
+```
+[root@master1181 wp-k8s]# kubectl delete -f wordpress-deployment.yaml
+service "wordpress" deleted
+persistentvolumeclaim "wp-pv-claim" deleted
+deployment.apps "wordpress" deleted
+
+[root@master1181 wp-k8s]# kubectl delete -f mysql-deployment.yaml
+service "wordpress-mysql" deleted
+persistentvolumeclaim "mysql-pv-claim" deleted
+deployment.apps "wordpress-mysql" deleted
+
+[root@master1181 wp-k8s]# kubectl delete -f wordpress-pv.yml
+persistentvolume "wordpress-data-1" deleted
+persistentvolume "wordpress-data-2" deleted
+
+[root@master1181 wp-k8s]# kubectl delete -f wordpress-secret.yml
+secret "mysql-pass" deleted
+```
 
 ## Nguồn
 
