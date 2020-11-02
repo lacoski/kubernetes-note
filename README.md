@@ -28,19 +28,13 @@
 
 ### 3. [Tổng quan và kiến trúc Helm](/docs/3-helm-k8s.md)
 
-## Thực hành
+## Thực hành cơ bản
 
 ### [1. Hướng dẫn Cài đặt Kubernetes (sử dụng Minikube)]()
 
-### [2. Hướng dẫn cài đặt Kubernetes (sử dụng Kubeadmin) trên CentOS 7](/docs/install-k8s-centos7-kubeadm.md)
+### [2. Hướng dẫn cài đặt Kubernetes (sử dụng Kubeadmin) trên CentOS 7](/docs/setup/install-k8s-centos7-kubeadm.md)
 
-### [3. Sử dụng Kubernetes 101]()
-
-#### [3.1. Thao tác với Pod](/docs/practise/pod-101.md)
-
-#### [3.2. Thao tác với Deployment](/docs/practise/deployment-101.md)
-
-### Triển khai NFS làm Storage cho K8s
+### [3. Triển khai NFS làm Storage cho K8s](/docs/setup/install-nfs-storage-k8s.md)
 
 ### 3. Hướng dẫn cài đặt Wordpress
 
@@ -51,3 +45,5 @@
 ### 6. Hướng dẫn cài đặt Weave Scope
 
 ### 7. Hướng dẫn cài đặt Kubernetes Dashboard
+
+## Sử dụng Kubernetes 101
