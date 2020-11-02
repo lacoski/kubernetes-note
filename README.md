@@ -44,7 +44,6 @@
 
 ### [6. Hướng dẫn cài đặt Wordpress bằng Helm](/docs/setup/install-wp-helm.md)
 
-### 7. Hướng dẫn cài đặt Weave Scope
+### [7. Hướng dẫn cài đặt Kubernetes Dashboard](/docs/setup/setup-kubernetes-dashboard.md)
 
-### 8. Hướng dẫn cài đặt Kubernetes Dashboard
-
+### 8. Hướng dẫn cài đặt Weave Scope
