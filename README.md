@@ -55,3 +55,5 @@
 ### [7. Hướng dẫn cài đặt Kubernetes Dashboard](/docs/setup/setup-kubernetes-dashboard.md)
 
 ### [8. Hướng dẫn cài đặt Weave Scope](/docs/setup/setup-weave-scope.md)
+
+### [9. Hướng dẫn triển khai MetalLB cho cụm K8s](/docs/raw-docs/install-metallb.md)
