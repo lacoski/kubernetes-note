@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app-1
+  name: hello-app-2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-app-1
+      app: hello-app-2
   template:
     metadata:
       labels:
-        app: hello-app-1
+        app: hello-app-2
     spec:
       containers:
-      - image: gcr.io/google-samples/hello-app:1.0
+      - image: gcr.io/google-samples/hello-app:2.0
         imagePullPolicy: Always
-        name: hello-app-1
+        name: hello-app-2
         ports:
         - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-app-1-services
+  name: hello-app-2-services
 spec:
   type: ClusterIP
   ports:
@@ -30,4 +30,4 @@ spec:
       targetPort: 8080
       protocol: TCP
   selector:
-    app: hello-app-1
+    app: hello-app-2

@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: hello-app-ingress
+spec:
+  rules:
+    - host: hello-app-1.local
+      http:
+        paths:
+          - backend:
+              serviceName: hello-app-1-services
+              servicePort: 8080
+            path: /
+    - host: hello-app-2.local
+      http:
+        paths:
+          - backend:
+              serviceName: hello-app-2-services
+              servicePort: 8080
+            path: /
