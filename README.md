@@ -38,4 +38,4 @@
 
 ## Vấn đề
 
-### 1. Vấn đề khi triển khai Nginx Ingress để expose service cụm K8s
+### [1. Vấn đề khi triển khai Nginx Ingress để expose service cụm K8s](/docs/problem/setup-own-nginx-ingress-k8s.md)
