@@ -1,8 +1,8 @@
 # Tài liệu ghi chép về Kubernetes
 
 ## Lý thuyết
-### [1. Tổng quan và kiến trúc Kubernetes](/docs/1-introduction-k8s.md)
 
+### [1. Tổng quan và kiến trúc Kubernetes](/docs/1-introduction-k8s.md)
 ### [2. Các khái niệm quan trọng](/docs/2-term-k8s.md)
 #### [2.1 Khái niệm Pod](/docs/2.1-pod-k8s.md)
 #### [2.2 Khái niệm ReplicaSet](/docs/2.2-rs-k8s.md)
@@ -13,18 +13,14 @@
 #### [2.7 Khái niệm DaemonSet](/docs/2.7-ds-k8s.md)
 #### [2.8 Khái niệm Job](/docs/2.8-job-k8s.md)
 #### [2.9 Khái niệm Ingress](/docs/2.9-ingress-k8s.md)
-
 #### 2.10 Khái niệm RBAC
-
 ### [3. Tổng quan và kiến trúc Helm](/docs/3-helm-k8s.md)
 ### [4. Các CMD thường sử dụng với Kubectl](/docs/kubectl-cmd.md)
 
 ## Thực hành cơ bản
 
 ### [Sử dụng Kubernetes 101](/docs/practise/kubernetes-101.md)
-
 ### [1. Thao tác với Pods](/docs/practise/pod-101.md)
-
 ### [2. Thao tác với Deployments](/docs/practise/deployment-101.md)
 
 ## Thực hành
