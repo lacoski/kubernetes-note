@@ -96,9 +96,44 @@ spec:
     app: hello-app
 
 
-[root@master1181 nginx-ingress-demo]# kubectl apply -f hello-app.yml 
-deployment.apps/hello-app created
-service/hello-app created
+[root@master1181 ~]# cat hello-app-2.yml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-app-2
+  template:
+    metadata:
+      labels:
+        app: hello-app-2
+    spec:
+      containers:
+      - image: gcr.io/google-samples/hello-app:2.0
+        imagePullPolicy: Always
+        name: hello-app-2
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-app-2
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: hello-app-2
+
+[root@master1181 nginx-ingress-demo]# kubectl apply -f hello-app-2.yml 
+deployment.apps/hello-app-2 created
+service/hello-app-2 created
 
 [root@master1181 nginx-ingress-demo]# kubectl get services
 NAME                                  TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
@@ -107,51 +142,49 @@ kubernetes                            ClusterIP      10.96.0.1        <none>    
 nginx-ingress-release-nginx-ingress   LoadBalancer   10.105.105.124   10.10.11.95   80:31322/TCP,443:32011/TCP   104m
 
 
-cat hello-app-ingress.yaml
-
-apiVersion: networking.k8s.io/v1
+[root@master1181 nginx-ingress-demo]# cat hello-app-ingress.yaml 
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: minimal-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+  name: example
 spec:
   rules:
-  - http:
-      paths:
-      - path: /hello-app
-        pathType: Prefix
-        backend:
-          service:
-            name: hello-app
-            port:
-              number: 80
+    - host: thanh.local
+      http:
+        paths:
+          - backend:
+              serviceName: hello-app
+              servicePort: 8080
+            path: /
+    - host: thanh2.local
+      http:
+        paths:
+          - backend:
+              serviceName: hello-app-2
+              servicePort: 8080
+            path: /
 
 
-kubectl apply -f hello-app-ingress.yaml
+[root@master1181 nginx-ingress-demo]# kubectl apply -f hello-app-ingress.yaml
+Warning: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
 
-
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-wildcard-host
-spec:
-  rules:
-  - host: "thanh.local"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/hello-app"
-        backend:
-          service:
-            name: hello-app
-            port:
-              number: 80
+http://thanh.local/
 
 [root@master1181 nginx-ingress-demo]# kubectl apply -f hello-app-ingress.yaml
 ingress.networking.k8s.io/minimal-ingress created
 
+
+[root@master1181 nginx-ingress-demo]# kubectl apply -f hello-app-ingress.yaml
+Warning: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable in v1.22+; use networking.k8s.io/v1 Ingress
+ingress.networking.k8s.io/example configured
+
+http://thanh2.local/
+
 ```
+
+## Nguồn
 
 https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-helm/
 

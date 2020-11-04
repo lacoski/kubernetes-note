@@ -121,7 +121,7 @@ wordpress-helm-data-2   20Gi       RWO            Retain           Available    
 ### Bước 3: Bổ sung Repo bitnami
 
 Lưu ý:
-- Nếu đã thên repo bitnami thì có thể bỏ qua
+- Nếu đã tồn tại repo bitnami thì có thể bỏ qua
 
 Thực hiện
 ```
