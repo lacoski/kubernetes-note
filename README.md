@@ -35,6 +35,7 @@
 ### [8. Hướng dẫn cài đặt Weave Scope](/docs/setup/setup-weave-scope.md)
 ### [9. Hướng dẫn triển khai MetalLB cho cụm K8s](/docs/setup/install-metallb.md)
 ### [10. Hướng dẫn triển khai Nginx Ingress Controller cho cụm K8s](/docs/setup/install-nginx-ingress-helm.md)
+### [11. Hướng dẫn triển khai Prometheus Stack cho cụm K8s](/docs/setup/install-prometheus-helm.md)
 
 ## Vấn đề
 
