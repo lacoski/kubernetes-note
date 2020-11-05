@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-headless
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: headless
+  template:
+    metadata:
+      labels:
+        app: headless
+    spec:
+      containers:
+      - name: abc
+        image: nginx
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
