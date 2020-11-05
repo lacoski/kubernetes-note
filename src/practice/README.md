@@ -19,7 +19,7 @@ Cài đặt Helm lên K8s Cluster
 
 ## Thực hành
 
-### [1. Pod, Deployment, DaemonSet, ReplicaSet](/src/practise/1-nginx)
+### [1. Pod, Deployment, DaemonSet, ReplicaSet](/src/practice/1-nginx)
 
 ### [2. Job, CronJob](/src/practice/2-job)
 
