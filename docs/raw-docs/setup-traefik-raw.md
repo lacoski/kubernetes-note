@@ -99,3 +99,7 @@ root@devtest-traefik:~# export WORDPRESS_DB_PASSWORD=secure_database_password_de
 root@devtest-traefik:~# export MYSQL_ROOT_PASSWORD=secure_database_password_demo
 
 https://www.digitalocean.com/community/tutorials/how-to-use-traefik-v2-as-a-reverse-proxy-for-docker-containers-on-ubuntu-20-04
+
+https://viblo.asia/p/tong-quan-ve-traefik-XL6lAA8Dlek
+
+curl -H Host:whoami.docker.localhost http://127.0.0.1
