@@ -220,8 +220,8 @@ pic2
 
 Tạo mới thư mục cho site Wordpress 1
 ```
-mkdir -p /root/traefix/wp
-cd /root/traefix/wp
+mkdir -p /root/traefix/wp1
+cd /root/traefix/wp1
 ```
 
 Tạo mới file docker-compose `docker-compose.yml`
@@ -231,21 +231,21 @@ version: "3"
 networks:
   web:
     external: true
-  internal:
+  internal1:
     external: false
 
 services:
-  blog:
+  wp1:
     image: wordpress:4.9.8-apache
     environment:
       WORDPRESS_DB_PASSWORD:
     labels:
-      - traefik.http.routers.blog.rule=Host(`wp1.devopsviet.com`)
-      - traefik.http.routers.blog.tls=true
-      - traefik.http.routers.blog.tls.certresolver=lets-encrypt
+      - traefik.http.routers.wp1.rule=Host(`wp1.devopsviet.com`)
+      - traefik.http.routers.wp1.tls=true
+      - traefik.http.routers.wp1.tls.certresolver=lets-encrypt
       - traefik.port=80
     networks:
-      - internal
+      - internal1
       - web
     depends_on:
       - mysql
@@ -254,24 +254,140 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD:
     networks:
-      - internal
+      - internal1
     labels:
       - traefik.enable=false
 
-  adminer:
+  adminerwp1:
     image: adminer:4.6.3-standalone
     labels:
     labels:
-      - traefik.http.routers.adminer.rule=Host(`db-admin.devopsviet.com`)
-      - traefik.http.routers.adminer.tls=true
-      - traefik.http.routers.adminer.tls.certresolver=lets-encrypt
+      - traefik.http.routers.adminerwp1.rule=Host(`db-admin-wp1.devopsviet.com`)
+      - traefik.http.routers.adminerwp1.tls=true
+      - traefik.http.routers.adminerwp1.tls.certresolver=lets-encrypt
       - traefik.port=8080
     networks:
-      - internal
+      - internal1
       - web
     depends_on:
       - mysql
 ```
+
+Đặt mật khẩu database
+```
+export WORDPRESS_DB_PASSWORD=cloud3652020
+export MYSQL_ROOT_PASSWORD=cloud3652020
+```
+
+Khởi động WP 1
+```
+docker-compose up -d
+```
+
+Kết quả
+```
+root@devtest-traefik:~/traefix/wp1# docker-compose up -d
+
+Creating network "wp1_internal1" with the default driver
+Creating wp1_mysql_1 ... done
+Creating wp1_adminerwp1_1 ... done
+Creating wp1_wp1_1        ... done
+```
+
+Truy cập site wp1 và setup tài khoản
+
+https://wp1.devopsviet.com/
+
+Truy cập trang quản trị DB, lưu ý: 
+- Server: mysql
+- Username: root
+- Password: cloud3652020
+- Database: Để trắng
+
+https://db-admin-wp1.devopsviet.com/
+
+### Bước 2: Khởi tạo Site WP2
+
+Tạo mới thư mục cho site Wordpress 1
+```
+mkdir -p /root/traefix/wp2
+cd /root/traefix/wp2
+```
+
+Tạo mới file docker-compose `docker-compose.yml`
+```
+version: "3"
+
+networks:
+  web:
+    external: true
+  internal2:
+    external: false
+
+services:
+  wp2:
+    image: wordpress:4.9.8-apache
+    environment:
+      WORDPRESS_DB_PASSWORD:
+    labels:
+      - traefik.http.routers.wp2.rule=Host(`wp2.devopsviet.com`)
+      - traefik.http.routers.wp2.tls=true
+      - traefik.http.routers.wp2.tls.certresolver=lets-encrypt
+      - traefik.port=80
+    networks:
+      - internal2
+      - web
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD:
+    networks:
+      - internal2
+    labels:
+      - traefik.enable=false
+
+  adminerwp2:
+    image: adminer:4.6.3-standalone
+    labels:
+    labels:
+      - traefik.http.routers.adminerwp2.rule=Host(`db-admin-wp2.devopsviet.com`)
+      - traefik.http.routers.adminerwp2.tls=true
+      - traefik.http.routers.adminerwp2.tls.certresolver=lets-encrypt
+      - traefik.port=8080
+    networks:
+      - internal2
+      - web
+    depends_on:
+      - mysql
+```
+
+Khởi động site WP2
+```
+docker-compose up -d
+```
+
+Kết quả
+```
+root@devtest-traefik:~/traefix/wp2# docker-compose up -d
+
+Creating network "wp2_internal2" with the default driver
+Creating wp2_mysql_1 ... done
+Creating wp2_adminerwp2_1 ... done
+Creating wp2_wp2_1        ... done
+
+```
+
+Truy cập site wp2 và setup tài khoản https://wp2.devopsviet.com/
+
+Truy cập trang quản trị DB https://db-admin-wp2.devopsviet.com/
+
+Lưu ý: 
+- Server: mysql
+- Username: root
+- Password: cloud3652020
+- Database: Để trắng
 
 ## Nguồn
 
