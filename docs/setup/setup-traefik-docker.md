@@ -17,7 +17,7 @@ Chuẩn bị VM đáp ứng các yêu cầu sau:
 - Cấu hình 2 Core - 2 GB Ram - 25GB Disk
 - Cần trỏ 3 domain tới địa chỉ IP Public của VM với các tiền tố: monitor, wp1, db-admin
 
-VM có địa chỉ IP Public là: 103.124.94.89 và đã trỏ `monitor.devopsviet.com, wp1.devopsviet.com, wp2.devopsviet.com, db-admin.devopsviet.com`
+VM có địa chỉ IP Public là: 103.124.94.89 và đã trỏ `monitor.devopsviet.com, wp1.devopsviet.com, db-admin-wp1.devopsviet.com, wp2.devopsviet.com, db-admin-wp2.devopsviet.com`
 
 ## Phần 1: Chuẩn bị các file cấu hình Traefix
 
@@ -206,13 +206,13 @@ Status: Downloaded newer image for traefik:v2.2
 
 Truy cập đường dẫn `https://monitor.your_domain/dashboard/`, trong bài đường dẫn của mình là ``
 
-pic1
+![](/images/setup/setup-traefik-docker/pic1.png)
 
 Nhập mật khẩu `admin / Cloud365a@123` (xem lại `Phần 1`) và đăng nhập
 
 Kết quả
 
-pic2
+![](/images/setup/setup-traefik-docker/pic2.png)
 
 ## Phần 3: Sử dụng Traefix làm Reverse Proxy cho Service WordPress
 
@@ -294,21 +294,31 @@ Creating wp1_adminerwp1_1 ... done
 Creating wp1_wp1_1        ... done
 ```
 
-Truy cập site wp1 và setup tài khoản
+Truy cập site wp1 và setup Wordpress cơ bản. Đường dẫn https://wp1.devopsviet.com/
 
-https://wp1.devopsviet.com/
+![](/images/setup/setup-traefik-docker/pic3.png)
 
-Truy cập trang quản trị DB, lưu ý: 
+Kết quả
+
+![](/images/setup/setup-traefik-docker/pic4.png)
+
+Truy cập trang quản trị DB https://db-admin-wp1.devopsviet.com/
+
+Lưu ý: 
 - Server: mysql
 - Username: root
 - Password: cloud3652020
 - Database: Để trắng
 
-https://db-admin-wp1.devopsviet.com/
+![](/images/setup/setup-traefik-docker/pic5.png)
+
+Kết quả
+
+![](/images/setup/setup-traefik-docker/pic6.png)
 
 ### Bước 2: Khởi tạo Site WP2
 
-Tạo mới thư mục cho site Wordpress 1
+Tạo mới thư mục cho site Wordpress 2
 ```
 mkdir -p /root/traefix/wp2
 cd /root/traefix/wp2
@@ -379,7 +389,13 @@ Creating wp2_wp2_1        ... done
 
 ```
 
-Truy cập site wp2 và setup tài khoản https://wp2.devopsviet.com/
+Truy cập site wp2 và setup Wordpress cơ bản https://wp2.devopsviet.com/
+
+![](/images/setup/setup-traefik-docker/pic7.png)
+
+Kết quả
+
+![](/images/setup/setup-traefik-docker/pic8.png)
 
 Truy cập trang quản trị DB https://db-admin-wp2.devopsviet.com/
 
@@ -388,6 +404,12 @@ Lưu ý:
 - Username: root
 - Password: cloud3652020
 - Database: Để trắng
+
+![](/images/setup/setup-traefik-docker/pic9.png)
+
+Kết quả
+
+![](/images/setup/setup-traefik-docker/pic10.png)
 
 ## Nguồn
 
